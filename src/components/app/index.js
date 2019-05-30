@@ -4,10 +4,9 @@ import Header from '../header';
 
 import './index.css';
 import ErrorBoundry from "../error-boundry";
-import ItemDetails, {Record} from "../item-details";
-import Row from "../row";
 import SwapiService from "../../services/swapi-service";
-import ItemList from "../item-list";
+
+import { SwapiServiceProvider } from '../swapi-service-context';
 
 import {
     PersonDetails,
@@ -30,47 +29,19 @@ export default class App extends Component {
     }
 
     render() {
-        const { getPerson, getStarship, getPersonImage, getStarshipImage, getAllPeople, getAllPlanets } = this.swapiService;
-
-        const personDetails = (
-            <ItemDetails
-                getData={getPerson}
-                itemId={11}
-                getImageUrl={getPersonImage}>
-
-                <Record field="gender" label="Gender" />
-                <Record field="birthYear" label="Birth year" />
-                <Record field="eyeColor" label="Eye color" />
-
-            </ItemDetails>
-        );
-
-        const starshipDetails = (
-            <ItemDetails
-                getData={getStarship}
-                itemId={5}
-                getImageUrl={getStarshipImage}>
-
-
-                <Record field="model" label="Model" />
-                <Record field="manufacturer" label="Manufacturer" />
-                <Record field="length" label="Length" />
-
-            </ItemDetails>
-        );
-
         return (
             <ErrorBoundry>
-                <Header />
-                {/*<RandomPlanet />
+                <SwapiServiceProvider value={this.swapiService}>
+                    <Header />
+                    {/*<RandomPlanet />
                 <div className="mb-4">
                     <ErrorButton/>
                 </div>
 
                 <PeoplePage />*/}
-                {/*<Row left={personDetails} right={starshipDetails} />*/}
+                    {/*<Row left={personDetails} right={starshipDetails} />*/}
 
-                {/*<ItemList
+                    {/*<ItemList
                     getData={getAllPeople}
                     onItemSelected={() => {}} >
                     {({name}) => <span>{name}</span>}
@@ -81,14 +52,15 @@ export default class App extends Component {
                     onItemSelected={() => {}} >
                     {({name}) => <span>{name}</span>}
                 </ItemList>*/}
-                <PersonDetails itemId={11}/>
-                <PersonList />
+                    <PersonDetails itemId={11}/>
+                    <PersonList />
 
-                <PlanetDetails itemId={5}/>
-                <PlanetList />
+                    <PlanetDetails itemId={5}/>
+                    <PlanetList />
 
-                <StarshipDetails itemId={9}/>
-                <StarshipList />
+                    <StarshipDetails itemId={9}/>
+                    <StarshipList />
+                </SwapiServiceProvider>
             </ErrorBoundry>
         )
     }
