@@ -8,14 +8,9 @@ import SwapiService from "../../services/swapi-service";
 
 import { SwapiServiceProvider } from '../swapi-service-context';
 
-import {
-    PersonDetails,
-    PlanetDetails,
-    StarshipDetails,
-    PersonList,
-    PlanetList,
-    StarshipList
-} from "../sw-component";
+import RandomPlanet from "../random-planet";
+
+import { PeoplePage, PlanetPage, StarshipPage } from '../pages';
 
 export default class App extends Component {
     swapiService = new SwapiService();
@@ -33,33 +28,13 @@ export default class App extends Component {
             <ErrorBoundry>
                 <SwapiServiceProvider value={this.swapiService}>
                     <Header />
-                    {/*<RandomPlanet />
-                <div className="mb-4">
-                    <ErrorButton/>
-                </div>
 
-                <PeoplePage />*/}
-                    {/*<Row left={personDetails} right={starshipDetails} />*/}
+                    <RandomPlanet />
 
-                    {/*<ItemList
-                    getData={getAllPeople}
-                    onItemSelected={() => {}} >
-                    {({name}) => <span>{name}</span>}
-                </ItemList>
+                    <PeoplePage/>
+                    <PlanetPage/>
+                    <StarshipPage/>
 
-                <ItemList
-                    getData={getAllPlanets}
-                    onItemSelected={() => {}} >
-                    {({name}) => <span>{name}</span>}
-                </ItemList>*/}
-                    <PersonDetails itemId={11}/>
-                    <PersonList />
-
-                    <PlanetDetails itemId={5}/>
-                    <PlanetList />
-
-                    <StarshipDetails itemId={9}/>
-                    <StarshipList />
                 </SwapiServiceProvider>
             </ErrorBoundry>
         )
